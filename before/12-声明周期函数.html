@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../lib/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="button" value="修改msg" @click="msg='no'">
+        <h3 id="h3">{{ msg }}</h3>
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            msg: 'ok'
+        },
+        methods: {},
+        beforeCreate() {
+            // 第一个生命周期函数,实例被完全创建之前,会执行它
+            // 此时 data 和 methods 中的数据都还没初始化
+        },
+        created() {
+            // 遇到的第二个生命周期函数
+            // 调用 methods 中的方法或者操作 data 中的数据,只能在 created中操作
+        },
+        beforeMount() {
+            // 第三个生命周期函数,表示模板已经在内存中编译完成了,但没有吧模板渲染到页面中
+            // beforeMount被执行的时候,页面中的元素没有被真正替换过来,只是之前写的模板字符串
+        },
+        mounted() {
+            // 这是我们遇到的第四个生命周期函数,表示内存的模板已经挂载到页面上了,用户可以看到渲染好的页面
+            // 如果没有其他操作,这个实力静静的在内存中,一动不动
+        },
+        beforeUpdate() {
+            // 表示界面没有被更新,数据已经被更新了
+            // 这个时候页面中的数据还是旧的,此时data数据是最新的,页面尚未和最新的数据保持同步
+        },
+        updated() {
+            // 执行这个生命周期函数的时候, 页面 和 data 数据已经保持同步了,都是最新的
+        },
+        beforeDestroy() { 
+            //  钩子函数的时候,vue实例已经从运行阶段,进入到了销毁阶段
+            //  实例身上所有的 data 和 所有的 methods, 以过滤,指令...
+            //  都处于可用状态,还没真正执行销毁的过程
+        },
+        destroyed() {
+            // 执行 destroyed 函数的时候 ,组件已经被完全销毁了,此时,组件中的所有数据
+            // .方法.指令.过滤器.都已经不可用了
+        }
+    })
+</script>
+</html>
